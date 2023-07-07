@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>snake game</title>
+    <link href="https://fonts.googleapis.com/css?family=Antic+Slab" rel="stylesheet">
+    <style media="screen">
+      #gameCanvas {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      .scores{
+        text-align: center;
+        font-size: 50px;
+      }
+      #love{
+        color: #ff66cc;
+        fond-weight: bold;
+      }
+      #hashira{
+        color: #66ff99;
+        fond-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="scores"><span id='love'>Love</span> <span id='hashira'>Hashira</span> Snake Game</div>
+    <div class='scores'>Player 1: <span id='score'>0</span>  Player 2: <span id='score2'>0</span></div>
+    <canvas id="gameCanvas" width="400" height="400"></canvas>
+    <script src="app.js"></script>
+
+  </body>
+</html>
