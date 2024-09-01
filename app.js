@@ -38,6 +38,9 @@ let dx = 10;
 // vertical movement
 let dy = 0;
 
+let dx2 = 10;
+let dy2 = 0;
+
 // get the canvas element
 const snakeboard = document.getElementById("gameCanvas");
 //return a two dimensional drawing context
@@ -55,6 +58,7 @@ function main() {
   if (has_game_ended() || has_game_ended2()) return;
 
   changingDir = false;
+  changingDir2 = false;
   setTimeout(onTick = () => {
     clearCanvas();
     drawFood();
@@ -135,7 +139,7 @@ function has_game_ended() {
  }
 
  function has_game_ended2() {
-   for (let i = 4; i < snake.length; i++) {
+   for (let i = 4; i < snake2.length; i++) {
      if (snake2[i].x === snake2[0].x && snake2[i].y === snake2[0].y) return true;
    }
    const hitLeftWall2 = snake2[0].x < 0;
@@ -166,28 +170,28 @@ function change_direction2(event) {
    const UP_KEY = 87;
    const DOWN_KEY = 83;
   // PREVENT THE SNAKE FROM REVERSING
-  if (changingDir) return;
-  changingDir = true;
+  if (changingDir2) return;
+  changingDir2 = true;
   const keyPressed = event.keyCode;
-  const goingUp = dy === -10;
-  const goingDown = dy === 10;
-  const goingRight = dx === 10;
-  const goingLeft = dx === -10;
+  const goingUp = dy2 === -10;
+  const goingDown = dy2 === 10;
+  const goingRight = dx2 === 10;
+  const goingLeft = dx2 === -10;
   if (keyPressed === LEFT_KEY && !goingRight) {
-    dx = -10;
-    dy = 0;
+    dx2 = -10;
+    dy2 = 0;
   }
   if (keyPressed === RIGHT_KEY && !goingLeft) {
-    dx = 10;
-    dy = 0;
+    dx2 = 10;
+    dy2 = 0;
   }
   if (keyPressed === UP_KEY && !goingDown) {
-    dx = 0;
-    dy = -10;
+    dx2 = 0;
+    dy2 = -10;
   }
   if (keyPressed === DOWN_KEY && !goingUp) {
-    dx = 0;
-    dy = 10;
+    dx2 = 0;
+    dy2 = 10;
   }
  }
 
@@ -241,7 +245,7 @@ function moveSnake() {
 
 function moveSnake2() {
   // create the new snake head
-  const head = {x: snake2[0].x + dx, y: snake2[0].y + dy};
+  const head = {x: snake2[0].x + dx2, y: snake2[0].y + dy2};
   // add the new head to the beginning of snake body
   snake2.unshift(head);
   const has_eaten_food = snake2[0].x === food_x && snake2[0].y === food_y;
