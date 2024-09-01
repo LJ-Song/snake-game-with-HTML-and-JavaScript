@@ -45,8 +45,12 @@ let dy2 = 0;
 const snakeboard = document.getElementById("gameCanvas");
 //return a two dimensional drawing context
 const snakeboardCtx = snakeboard.getContext("2d");
+const time = 60;
+document.getElementById("timer").innerHTML = time;
 //start the game
+let time_ended = timeEnded(time);
 main();
+
 
 gen_food();
 
@@ -55,7 +59,36 @@ document.addEventListener('keydown', change_direction2);
 
 function main() {
 
-  if (has_game_ended() || has_game_ended2()) return;
+  if (has_game_ended()) {
+    if (score == score2) {
+      alert('It is a tie! ');
+      return;
+    }
+    alert("Blue Snake Won! ");
+    return;
+  } 
+  if (has_game_ended2()) {
+    if (score == score2) {
+      alert('It is a tie! ');
+      return;
+    }
+    alert("Pink Snake Won! ");
+    return;
+  }
+  if (time_ended) {
+    if (score > score2) {
+      alert("Pink Snake Won! ");
+      return;
+    }
+    else if (score == score2) {
+      alert("It is a tie! ");
+      return;
+    }
+    else {
+      alert("Blue Snake Won! ");
+      return;
+    }
+  }
 
   changingDir = false;
   changingDir2 = false;
@@ -241,6 +274,19 @@ function moveSnake() {
   } else {
     snake.pop();
   }
+}
+
+
+function timeEnded(time) {
+  let x = setInterval(onTick = () => {
+    time -= 1;
+    document.getElementById("timer").innerHTML = time;
+    if (time == 0 || (has_game_ended()) || (has_game_ended2())) {
+      clearInterval(x);
+      document.getElementById("timer").innerHTML = time;
+      return true;
+    }
+  }, 1000)
 }
 
 function moveSnake2() {
